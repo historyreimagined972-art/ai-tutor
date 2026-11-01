@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const envSchema = z.object({
-  VITE_API_BASE_URL: z.string().url('VITE_API_BASE_URL must be a valid URL'),
+  VITE_API_BASE_URL: z.string().default(''),
 });
 
 const parsed = envSchema.safeParse(import.meta.env);
@@ -11,4 +11,7 @@ if (!parsed.success) {
   throw new Error('Invalid environment variables');
 }
 
-export const env = parsed.data;
+export const env = {
+  ...parsed.data,
+  VITE_API_BASE_URL: parsed.data.VITE_API_BASE_URL.replace(/\/+$/, ''),
+};

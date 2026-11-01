@@ -8,6 +8,8 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // 1. Security headers (disable crossOrigin policies that conflict with CORS)
 app.use(helmet({
   crossOriginResourcePolicy: false,

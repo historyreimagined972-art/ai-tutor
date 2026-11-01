@@ -44,3 +44,5 @@ instructions_extracted.txt
 
 # TypeScript
 *.js.map
+
+.vercel
