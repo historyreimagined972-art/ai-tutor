@@ -3,8 +3,8 @@ import dns from 'dns';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { env } from './env.js';
 
-// Use Google DNS to resolve MongoDB Atlas hostnames
-dns.setServers(['8.8.8.8', '8.8.4.4']);
+// Prefer Cloudflare DNS — resolves MongoDB Atlas SRV records reliably
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 let memoryServer: MongoMemoryServer | null = null;
 
