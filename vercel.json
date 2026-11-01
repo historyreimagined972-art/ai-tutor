@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "installCommand": "cd backend && npm ci --no-audit --no-fund && cd ../frontend && npm ci --no-audit --no-fund",
+  "buildCommand": "cd backend && npm run build --silent && cd ../frontend && npm run build --silent",
+  "outputDirectory": "frontend/dist",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/health", "destination": "/api/index.js" },
+    { "source": "/ready", "destination": "/api/index.js" },
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}
